@@ -1,0 +1,573 @@
+*{
+  box-sizing: border-box;
+}
+body{
+  font:14px "Helvitica Neue",Helvitica,Arial,"Hiragino Sans GB","Microsoft YaHei","Arial Regular","Microsoft JhengHei",sans-serif;
+  color:#fff;
+  padding:0;
+  margin:0;
+}
+ul,p,h1,h2,h3,h4,h5,h6,dl,dd{
+  padding:0;
+  margin:0;
+  list-style:none;
+}
+img{vertical-align:middle;}
+.lf{float:left;}
+.rf{float:right;}
+.clear{clear:both;}
+a{
+  color: #fff;
+  transition: all .3s linear;
+  text-decoration: none;
+}
+a:hover{
+  color: #00BBFF;
+}
+.fixed{
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+.textCenter{
+  text-align: center;
+}
+.text-bg{
+  color: #00BBFF;
+  font-size: 1.3em;
+}
+.bg-color{
+  background: #00BBFF;
+}
+.container{
+  width: 70%;
+  height: 100vh;
+  margin: 0 auto;
+  text-align: center;
+  position: relative;
+  margin-top: 10%;
+}
+/*顶部nav*/
+.navbar{
+  width: 100%;
+  background: rgba(0,0,0,0);
+  margin-top: 25px;
+  position: fixed;
+  overflow: hidden;
+  z-index: 1030;
+}
+.container_nav{
+  width: 96%;
+  margin: 0 2%;
+  position: relative;
+}
+.nav-logo{
+  float: left;
+}
+.navbar-nav{
+  width: 50%;
+  margin: 0 auto;
+  padding-top: 22px;
+  text-align: center;
+}
+.navbar-nav ul{
+  display: inline-block;
+}
+.navbar-nav ul:after{
+  content: '';
+  display: table;
+  clear: both;
+}
+.navbar-nav li{
+  float: left;
+}
+.navbar-nav li a{
+  display: block;
+  padding: 5px 10px;
+  font-size: 1.5em;
+  transition: background .3s linear;
+  position: relative;
+}
+.navbar-nav li a div{
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  width: 0;
+  height: 0;
+  padding: 0;
+  transition: all .2s linear;
+}
+.navbar-nav li a:hover div{
+  width: 100%;
+  height: 100%;
+  background: rgba(221,221,221,.3);
+}
+.navbar-tel{
+  float: right;
+  margin-top: 22px;
+  font-size: 1.5em;
+  color: #00BBFF;
+}
+.navbar-tel span{
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  position: relative;
+  top: 3px;
+  left: -10px;
+  background: url("../image/tel.png") no-repeat;
+}
+/*home*/
+.home{
+  overflow: hidden;
+  width: 100%;
+  height: 100vh
+}
+.home:before{
+  content: ' ';
+  display: table;
+  clear: both;
+}
+.banner{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  font-style: italic;
+  font-weight: bold;
+  text-align: center;
+  transition: all 2s linear;
+}
+.banner1{
+  background: url("../image/banner10.jpg") no-repeat center center;
+}
+.banner-text{
+  width: 70%;
+  padding-top: 20%;
+  margin: 0 auto;
+  overflow: hidden;
+}
+.banner_h1{
+  font-size: 5em;
+  font-family: arvo;
+  letter-spacing: 5px;
+}
+.banner_h3{
+  font-size: 2em;
+  position: relative;
+}
+.banner2{
+  background: url("../image/banner02.jpg") 50%;
+}
+.banner3{
+  background: url("../image/banner13.jpg") 50%;
+}
+.banner4{
+  background: url("../image/banner07.jpg") 50%;
+}
+.banner5{
+  background: url("../image/banner05.jpg") 50%;
+}
+div.active{
+  opacity: 1;
+  z-index: 10;
+}
+div.unactive{
+  opacity: 0;
+  z-index: -10;
+}
+
+.key{
+  animation:scale 1.5s linear;
+}
+@keyframes scale{
+  0%{
+    opacity: 0.5;
+    transform:scale(0.1);
+  }
+  60%{
+     opacity: 0.7;
+    transform:scale(1);
+  }
+  90%{
+    opacity: 0.9;
+    transform:scale(1.2);
+  }
+  100%{
+    opacity: 1;
+    transform:scale(1);
+  }
+}
+.key1{
+  animation:top 1.5s linear;
+}
+@keyframes top{
+  0%{
+    top: 280px;
+  }
+  100%{
+    top:0px;;
+  }
+}
+/*小圆点*/
+.num{
+  position: absolute;
+  bottom: 10%;
+  left: 45%;
+  z-index: 50;
+}
+.num:after{
+  content: '';
+  display: table;
+  clear: both;
+}
+.num li{
+  float:left;
+  margin: 10px;
+  width: 16px;
+  height: 16px;
+  border-radius: 8px;
+  border: 1px solid #fff;
+  cursor: pointer;
+}
+
+/*abouts*/
+.abouts{
+  background: url("../image/banner03.jpg") no-repeat center center;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+.aboutsTitle{
+  position: absolute;
+  top: 15%;
+}
+.aboutsTitle a{
+  display: inline-block;
+  font-size: 1.2em;
+  padding: 10px 15px ;
+  color: #ddd;
+  position: relative;
+}
+.titleBg0{
+  background: rgba(0,187,225,.5);
+}
+.titleBg1{
+  background: rgba(0,187,225,1);
+}
+.aboutsTitle a b{
+  display: none;
+  position: absolute;
+  bottom: -20px;
+  left: 35%;
+  border-style: solid;
+  border-width: 10px;
+  border-color: rgb(0,187,225) transparent transparent transparent;
+}
+.aboutsMain{
+  position: absolute;
+  top: 27%;
+  width: 50%;
+  height: 300px;
+}
+.aboutsMain div{
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.aboutsMain p{
+  margin-bottom: 10px;
+  text-align: justify;
+}
+.aboutsMain h4{
+  color: #00bbff;
+  font-size: 1.1em;
+  font-weight: normal;
+  margin: 5px 0;
+  text-align: left;
+}
+/*services*/
+.services{
+  width: 100%;
+  height: 100vh;
+  background: url("../image/banner11.jpg") no-repeat;
+  overflow: hidden;
+}
+.servicesTxt,.solutionsTxt{
+  text-align: center;
+  font-size: 3em;
+  font-family: arvo;
+  margin-bottom: 10px;
+}
+.servicesType ul:after,.solutionsType ul:after{
+  content: '';
+  display: table;
+  clear: both;
+}
+.servicesType li,.solutionsType li{
+  float: left;
+  width: 25%;
+  text-align: center;
+  font-size: 1.7em;
+  font-weight: 600;
+  margin-top: 30px;
+  position: relative;
+}
+.servicesType li a,.solutionsType li a{
+  display: block;
+}
+.servicesType li p,.solutionsType li p{
+  margin: 10px;
+}
+.servicesType li b,.solutionsType li b{
+  display: block;
+  width: 50px;
+  height: 50px;
+  margin: 30px auto;
+}
+.servicesType li:nth-child(1) b{
+  background: url("../image/tubiao.png") no-repeat 0 10px;
+}
+.servicesType li:nth-child(2) b{
+  background: url("../image/tubiao.png") no-repeat 0px -50px;
+}
+.servicesType li:nth-child(3) b{
+  background: url("../image/tubiao.png") no-repeat 0 -235px;
+}
+.servicesType li:nth-child(4) b{
+  background: url("../image/tubiao.png") no-repeat 0 -435px;
+}
+.servicesType li:nth-child(5) b{
+  background: url("../image/tubiao.png") no-repeat 0 -127px;
+}
+.servicesType li:nth-child(6) b{
+  background: url("../image/tubiao.png") no-repeat 0 -180px;
+}
+.servicesType li:nth-child(7) b{
+  background: url("../image/tubiao.png") no-repeat 0 -300px;
+}
+.servicesType li:nth-child(8) b{
+  background: url("../image/tubiao.png") no-repeat 0 -370px;
+}
+.hideTxt{
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-size: 0.8em;
+  background: rgba(0,187,225,.8);
+  transform: scale(0);
+  transition: transform .3s linear;
+}
+div.scale{
+  transform: scale(1);
+}
+.hideTxt .hideMain{
+  font-weight: normal;
+  font-size: 0.7em;
+}
+
+/*solutions*/
+.solutions{
+  width: 100%;
+  height: 100vh;
+  background: url("../image/banner09.jpg") no-repeat;
+  overflow: hidden;
+}
+.solutionsType li:nth-child(1) b{
+  background: url("../image/tubiao.png") no-repeat -117px 0;
+}
+.solutionsType li:nth-child(2) b{
+  background: url("../image/tubiao.png") no-repeat -117px -120px;
+}
+.solutionsType li:nth-child(3) b{
+  background: url("../image/tubiao.png") no-repeat -114px -247px;
+}
+.solutionsType li:nth-child(4) b{
+  background: url("../image/tubiao.png") no-repeat -114px -372px;
+}
+.solutionsType li:nth-child(5) b{
+  background: url("../image/tubiao.png") no-repeat -112px -55px;
+}
+.solutionsType li:nth-child(6) b{
+  background: url("../image/tubiao.png") no-repeat -113px -183px;
+}
+.solutionsType li:nth-child(7) b{
+  background: url("../image/tubiao.png") no-repeat -114px -309px;
+}
+.solutionsType li:nth-child(8) b{
+  background: url("../image/tubiao.png") no-repeat -114px -436px;
+}
+
+/*clients*/
+.clients{
+  width: 100%;
+  height: 100vh;
+  background: url("../image/banner04.jpg") no-repeat;
+  overflow: hidden;
+}
+.clientsMain{
+  margin-top: 30px;
+}
+.clientsMain:after{
+  content:'';
+  display: table;
+  clear: both;
+}
+.clientsMain dl{
+  float: left;
+  width: 23%;
+  margin: 1%;
+}
+/*.clientsMain dl img{*/
+  /*box-shadow: 4px 4px 10px #00bbff;*/
+/*}*/
+.clientsMain dl dt{
+  transform: rotatey(0deg);
+  transition: all .6s linear;
+}
+.clientsMain dt a{
+  display: block;
+}
+img.replo{
+  max-width: 100%;
+}
+.clientsMain dl dt:hover{
+  transform: rotatey(30deg);
+}
+.clientsMain dl dd{
+  margin: 10px;
+  color: #00BBFF;
+}
+
+/*contacts*/
+.contacts{
+  width: 100%;
+  height: 100vh;
+  background: url("../image/banner01.jpg") no-repeat;
+  overflow: hidden;
+}
+.contactsMain{
+  margin-top: 30px;
+}
+.contactsMain>ul>li{
+  float: left;
+  width: 30%;
+}
+.contactsMain>ul>li:nth-child(2){
+  margin: 0 5%;
+}
+.contactWay li{
+  margin-bottom: 20px;
+  text-align: left;
+}
+.contactWay li p{
+  font-size: 0.9em;
+}
+.contactWay li a{
+  display: block;
+  width: 80%;
+  height: 40px;
+  line-height: 40px;
+  color: #fff;
+  text-align: center;
+  font-size: 1.2em;
+}
+.bg-blue{
+  background: #00BBFF;
+}
+.bg-orange{
+  background-color: #EC4401;
+}
+
+/*******************/
+.modeul{
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,.8);
+  display: none;
+}
+.modeulBox{
+  width: 45%;
+  min-height: 300px;
+  margin: 15% auto;
+  border: 1px dashed #ffffff;
+  text-align: center;
+  padding: 1em;
+  position: relative;
+}
+.modeulBox ul:after{
+  content: '';
+  display: table;
+  clear: both;
+}
+.modeulBox li{
+  width: 50%;
+  float: left;
+  margin: 10px 0;
+}
+.modeulBox li span{
+  display: inline-block;
+  width: 30%;
+  line-height: 40px;
+  text-align: right;
+  font-size: 1.2em;
+}
+.off{
+  display: block;
+  width: 30px;
+  line-height: 30px;
+  font-size: 2em;
+  background: #fff;
+  color: #333;
+  position: absolute;
+  top: -15px;;
+  right: -15px;
+  border-radius: 15px;
+  cursor: pointer;
+}
+
+.form_group{
+  margin-bottom: 10px;
+  width: 100%;
+}
+.form_group>label{
+  display: inline-block;
+  width: 22%;
+  font-size: 1.4em;
+  text-align: right;
+  padding: 5px 5px;
+}
+.form_group>input,.form_group>textarea{
+  width: 60%;
+  border-radius: 2px;
+  border: 1px solid #aaaaaa;
+  padding: 5px 5px;
+  background: transparent;
+  color: #fff;
+}
+.form_group>textarea{
+	line-height:50px; 
+}
+.form_group>input[type="submit"]{
+  background: #00BBFF;
+  border: 1px solid #fff;
+  padding: 5px 5px;
+  margin-left: 27%;
+  width: 30%;
+  font-size: 1.4em;
+}
+
+
+
+
+

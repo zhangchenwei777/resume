@@ -1,0 +1,398 @@
+
+
+<!DOCTYPE html>
+
+<html lang="zh-cn">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta name="keywords" content="漯河时光网络科技,MVC,Razor,ASP.NET MVC,ASP.NET MVC中，在View和PartialView中&quot;共享变量&quot;的方法,漯河时光网络科技有限公司">
+	<meta name="description" content="最近在做一些比较基础的部分，做到界面时想到一个问题：在ASP.NET MVC(Razor View Engine)中，如果我要让多个项目之间共享一个_Layout.cshtml，那样的话对于维护程序和统一风格都是有比较大的帮助的。但是问题是，如…">
+	<meta name="author" content="漯河时光网络科技有限公司">
+	<title>ASP.NET MVC中，在View和PartialView中&quot;共享变量&quot;的方法_公司动态_资讯中心_漯河时光网络科技有限公司</title>
+	<link href="../../Content/shiguang-v=2KuUzExbd1qVFeys1bM9cZr-yMK4rB8IT5OSDIuRMio1.css" tppabs="http://www.5shiguang.net/Content/shiguang?v=2KuUzExbd1qVFeys1bM9cZr-yMK4rB8IT5OSDIuRMio1" rel="stylesheet"/>
+
+	<script src="../../bundles/modernizr-v=w9fZKPSiHtN4N4FRqV7jn-3kGoQY5hHpkwFv5TfMrus1.js" tppabs="http://www.5shiguang.net/bundles/modernizr?v=w9fZKPSiHtN4N4FRqV7jn-3kGoQY5hHpkwFv5TfMrus1"></script>
+
+	
+	<link href="../../Scripts/Kindeditor/plugins/code/prettify.css" tppabs="http://www.5shiguang.net/Scripts/Kindeditor/plugins/code/prettify.css" rel="stylesheet" />
+
+</head>
+<body>
+	<div class="hidden"><img src="../../Images/logo_baidu.jpg" tppabs="http://www.5shiguang.net/Images/logo_baidu.jpg" width="121" height="75" alt="漯河时光网络科技有限公司_logo" title="漯河时光网络科技有限公司" /></div>
+	
+<nav class="navbar navbar-default navbar-shiguang navbar-shiguang-sm navbar-fixed-top">
+	<div class="container-fluid">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" aria-expanded="false" data-target=".navbar-collapse">
+				<span class="sr-only">导航</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="../../index.htm" tppabs="http://www.5shiguang.net/"><img src="../../Images/shiguang_logo-250x50.png" tppabs="http://www.5shiguang.net/Images/shiguang_logo-250x50.png" alt="漯河时光网络科技有限公司" title="漯河时光网络科技有限公司" /></a>
+		</div>
+		<div class="navbar-collapse collapse">
+			<ul class="nav navbar-nav navbar-respond">
+				<li class=""><a href="../../index.htm" tppabs="http://www.5shiguang.net/">首页</a></li>
+				<li class="active"><a href="../../News.htm" tppabs="http://www.5shiguang.net/News">资讯</a></li>
+				<li class=""><a href="javascript:if(confirm(%27http://www.5shiguang.net/Services  \n\nThis file was not retrieved by Teleport Pro, because it is linked too far away from its Starting Address. If you increase the in-domain depth setting for the Starting Address, this file will be queued for retrieval.  \n\nDo you want to open it from the server?%27))window.location=%27http://www.5shiguang.net/Services%27" tppabs="http://www.5shiguang.net/Services">产品服务</a></li>
+				<li class=""><a href="javascript:if(confirm(%27http://www.5shiguang.net/Solutions  \n\nThis file was not retrieved by Teleport Pro, because it is linked too far away from its Starting Address. If you increase the in-domain depth setting for the Starting Address, this file will be queued for retrieval.  \n\nDo you want to open it from the server?%27))window.location=%27http://www.5shiguang.net/Solutions%27" tppabs="http://www.5shiguang.net/Solutions">方案</a></li>
+				<li class=""><a href="../../Jobs.htm" tppabs="http://www.5shiguang.net/Jobs">招聘</a></li>
+				<li class=""><a href="../../index.htm#contacts" tppabs="http://www.5shiguang.net/#contacts">联系</a></li>
+			</ul>
+			<ul class="nav navbar-nav navbar-right">
+				<li><a href="tel:400-6650-361" title="全国统一客服热线：400-6650-361"><span class="segmdl2 segmdl2-Phone"></span> 400-6650-361</a></li>
+			</ul>
+		</div>
+	</div>
+</nav>
+
+	
+
+<div class="hidden"><img src="../../UploadFiles/2016-03/1d735e9a-8955-4fde-9df6-78306e8288cf.png" tppabs="http://www.5shiguang.net/UploadFiles/2016-03/1d735e9a-8955-4fde-9df6-78306e8288cf.png" title="ASP.NET MVC中，在View和PartialView中&quot;共享变量&quot;的方法" alt="ASP.NET MVC中，在View和PartialView中&quot;共享变量&quot;的方法" /></div>
+<section class="banner">
+	<img src="../../Images/banners/banner-news.jpg" tppabs="http://www.5shiguang.net/Images/banners/banner-news.jpg" alt="news" class="banner-img" />
+	<div class="banner-content">
+		<div class="container">
+			<h1 class="wow bounceInRight">紧跟科技步伐，<span class="highlight">与时俱进</span>！</h1>
+			<p class="lead wow bounceInRight" data-wow-delay="0.5s">Keeping up with the pace of technology, advancing with the times!</p>
+		</div>
+	</div>
+</section>
+
+
+<section class="body-content">
+	<div class="container">
+
+		<ol class="breadcrumb">
+			<li class="active">当前位置：</li>
+			<li><a href="../../index.htm" tppabs="http://www.5shiguang.net/">首页</a></li>
+			<li><a href="../../News.htm" tppabs="http://www.5shiguang.net/News">资讯中心</a></li>
+			<li><a href="javascript:if(confirm(%27http://www.5shiguang.net/News/Category/cc0fefac-f3bd-e511-9e56-b8975a40f4f0  \n\nThis file was not retrieved by Teleport Pro, because it is linked too far away from its Starting Address. If you increase the in-domain depth setting for the Starting Address, this file will be queued for retrieval.  \n\nDo you want to open it from the server?%27))window.location=%27http://www.5shiguang.net/News/Category/cc0fefac-f3bd-e511-9e56-b8975a40f4f0%27" tppabs="http://www.5shiguang.net/News/Category/cc0fefac-f3bd-e511-9e56-b8975a40f4f0">公司动态</a></li>
+			<li class="active hidden-xs">ASP.NET MVC中，在View和PartialView中&quot;共享变量&quot;的方法</li>
+		</ol>
+
+		<div class="row">
+			<article class="col-md-8 news-item">
+				<h3 class="page-header sidebar-title">ASP.NET MVC中，在View和PartialView中&quot;共享变量&quot;的方法</h3>
+				<div class="news-info clearfix">
+					<div class="pull-right">
+						<span class="news-info-item"><span class="segmdl2 segmdl2-pointer"></span> 2796</span>
+						<a href="#comments" class="news-info-item toscroll"><span class="segmdl2 segmdl2-Comment"></span> 2</a>
+					</div>
+					<span class="news-info-item"><span class="segmdl2 segmdl2-CalendarDay"></span> 2016-03-29</span>
+					<span class="news-info-item"><span class="segmdl2 segmdl2-Contact"></span> Dodu</span>
+					<a href="javascript:if(confirm(%27http://www.5shiguang.net/News/Category/cc0fefac-f3bd-e511-9e56-b8975a40f4f0  \n\nThis file was not retrieved by Teleport Pro, because it is linked too far away from its Starting Address. If you increase the in-domain depth setting for the Starting Address, this file will be queued for retrieval.  \n\nDo you want to open it from the server?%27))window.location=%27http://www.5shiguang.net/News/Category/cc0fefac-f3bd-e511-9e56-b8975a40f4f0%27" tppabs="http://www.5shiguang.net/News/Category/cc0fefac-f3bd-e511-9e56-b8975a40f4f0" class="news-info-item"><span class="segmdl2 segmdl2-List"></span> 公司动态</a>
+				</div>
+				<div class="news-content"><p>
+	最近在做一些比较基础的部分，做到界面时想到一个问题：
+</p>
+<p>
+	在ASP.NET MVC(Razor View Engine)中，如果我要让多个项目之间共享一个_Layout.cshtml，那样的话对于维护程序和统一风格都是有比较大的帮助的。但是问题是，如果真的要共享的话，各个项目之间不同的元素该如何处理呢，比如:Logo,项目名称等。看到了_LogOnPartial.cshtml文件让我想起来一个方法，如果我在_Layout.cshtml里定义一个变量，然后再做一个Partial.cshtml，在这个Partial里为_Layout.cshtml中的变量赋值，这样不就行了吗，说简单点就是定义一个在Layout和Partial里面"共用"的变量不就解决了吗，赶紧试试。
+</p>
+<p>
+	结果是很快发现这貌似行不通，因为无论是Layout、View还是Partial，在运行时都是被编译成一个类，并且生成了这个类的实例，然后按照一定的顺序执行的，在设计阶段还没有实例呢，所以定义变量貌似不现实。于是又想到ViewBag和ViewData，试一下，又发现不行，各个View（Layout、Partial）中的ViewBag和ViewData实际上也是他们自已的，和其他的View没有关系，在Partial的ViewData里添加一个元素，到了Loyout里面根本就找不见了。
+</p>
+<p style="text-align:center;">
+	<img src="../../UploadFiles/2016-03/1d735e9a-8955-4fde-9df6-78306e8288cf.png" tppabs="http://www.5shiguang.net/UploadFiles/2016-03/1d735e9a-8955-4fde-9df6-78306e8288cf.png" /> 
+</p>
+<p>
+	那么Partial和Layout之间有什么联系呢，答案很快出来了，Controller，他俩在生命周期存在时肯定是用了同一个Controller实例!赶紧调试下，果然发现在Partial执行时，Partial的ViewData和Controller的ViewData中的元素个数不同，这就说明他俩没有使用同一个引用，于是在Partial里向Controller的ViewData添加一个元素，然后在Layout中已经调用过Partial的代码下方尝试读取Controller.ViewData中的元素，果然得到了期望的结果。
+</p>
+<p>
+	用法示例：
+</p>
+<pre class="prettyprint lang-cs">ViewContext.Controller.ViewData.Add("test","abcd");</pre>
+<p>
+	<span style="line-height:1.5;">最后再查查MSDN，发现了另一个方法也能解决这个问题，即使用WebViewPage.Context.Items属性,Context的类型为HttpContextBase,其Items属性的描述如下：</span> 
+</p>
+<p>
+	“在派生类中重写时，获取一个键/值集合，该集合在 HTTP 请求过程中可以用于在模块与处理程序之间组织和共享数据。”
+</p>
+<p>
+	经测试，使用：
+</p>
+<pre class="prettyprint lang-cs">Context.Items["test"] ="abcd";</pre>
+<p>
+	<span style="line-height:1.5;">的方式也能达到在两个View间“共享变量”的效果，但是我推荐使用第一种方法。</span> 
+</p></div>
+				<hr />
+				<!--news tags-->
+				<div class="tags">
+					<ul class="news-tags">
+						<li>关键词：</li>
+							<li class="news-tag"><a href="javascript:if(confirm(%27http://www.5shiguang.net/News/Tag/%E6%BC%AF%E6%B2%B3%E6%97%B6%E5%85%89%E7%BD%91%E7%BB%9C%E7%A7%91%E6%8A%80  \n\nThis file was not retrieved by Teleport Pro, because it is linked too far away from its Starting Address. If you increase the in-domain depth setting for the Starting Address, this file will be queued for retrieval.  \n\nDo you want to open it from the server?%27))window.location=%27http://www.5shiguang.net/News/Tag/%E6%BC%AF%E6%B2%B3%E6%97%B6%E5%85%89%E7%BD%91%E7%BB%9C%E7%A7%91%E6%8A%80%27" tppabs="http://www.5shiguang.net/News/Tag/%E6%BC%AF%E6%B2%B3%E6%97%B6%E5%85%89%E7%BD%91%E7%BB%9C%E7%A7%91%E6%8A%80">漯河时光网络科技</a></li>
+							<li class="news-tag"><a href="javascript:if(confirm(%27http://www.5shiguang.net/News/Tag/MVC  \n\nThis file was not retrieved by Teleport Pro, because it is linked too far away from its Starting Address. If you increase the in-domain depth setting for the Starting Address, this file will be queued for retrieval.  \n\nDo you want to open it from the server?%27))window.location=%27http://www.5shiguang.net/News/Tag/MVC%27" tppabs="http://www.5shiguang.net/News/Tag/MVC">MVC</a></li>
+							<li class="news-tag"><a href="javascript:if(confirm(%27http://www.5shiguang.net/News/Tag/Razor  \n\nThis file was not retrieved by Teleport Pro, because it is linked too far away from its Starting Address. If you increase the in-domain depth setting for the Starting Address, this file will be queued for retrieval.  \n\nDo you want to open it from the server?%27))window.location=%27http://www.5shiguang.net/News/Tag/Razor%27" tppabs="http://www.5shiguang.net/News/Tag/Razor">Razor</a></li>
+							<li class="news-tag"><a href="javascript:if(confirm(%27http://www.5shiguang.net/News/Tag/ASP.NET%20MVC  \n\nThis file was not retrieved by Teleport Pro, because it is linked too far away from its Starting Address. If you increase the in-domain depth setting for the Starting Address, this file will be queued for retrieval.  \n\nDo you want to open it from the server?%27))window.location=%27http://www.5shiguang.net/News/Tag/ASP.NET%20MVC%27" tppabs="http://www.5shiguang.net/News/Tag/ASP.NET%20MVC">ASP.NET MVC</a></li>
+					</ul>
+				</div>
+				<!--baidu分享-->
+				<div class="news-share">
+					<div class="bdsharebuttonbox shiguang-share-box">
+						<a href="javascript:;" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+						<a href="javascript:;" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+						<a href="javascript:;" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+					</div>
+					<script>window._bd_share_config = { "common": { "bdSnsKey": {}, "bdText": "", "bdMini": "2", "bdMiniList": ["renren", "kaixin001", "tqf", "tieba", "douban", "mail", "ty", "evernotecn", "copy", "print"], "bdPic": "", "bdStyle": "1", "bdSize": "16" }, "share": {}, "image": { "viewList": ["qzone", "tsina", "tqq", "sqq", "weixin", "fbook", "twi", "linkedin"], "viewText": "分享到：", "viewSize": "16" } }; with (document) 0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion=' + ~(-new Date() / 36e5)];</script>
+				</div>
+				<!-- news Comments -->
+				<div class="comments1">
+					<div class="well mb30">
+						<h4>发表评论：</h4>
+						
+<form action="http://www.5shiguang.net/News/Comment" autocomplete="off" data-ajax="true" data-ajax-begin="onCommentBegin" data-ajax-failure="onFailure" data-ajax-method="Post" data-ajax-success="onCommentSuccess" id="commentForm" method="post" role="form"><input name="__RequestVerificationToken" type="hidden" value="MDJdty-Q0I1bfl7ZaLYE_HHT2ZqzXMsUdDY9mm9DPeleb8vHTDdeMQxBT6_Ow2jY7vqn1CKB5PkB3FayIBYLTKSAtihqffzYDiXgcT5q-oM1" /><input data-val="true" data-val-required="ID 字段是必需的。" id="ID" name="ID" type="hidden" value="8bb96166-79f5-e511-9424-5ef3fcde9a37" /><input data-val="true" data-val-required="资讯 必填" id="NewsID" name="NewsID" type="hidden" value="8bb96166-79f5-e511-9424-5ef3fcde9a37" /><input data-val="true" data-val-number="字段 同意 必须是一个数字。" data-val-required="同意 字段是必需的。" id="Agree" name="Agree" type="hidden" value="0" /><input data-val="true" data-val-number="字段 反对 必须是一个数字。" data-val-required="反对 字段是必需的。" id="DisAgree" name="DisAgree" type="hidden" value="0" /><input data-val="true" data-val-length="IP地址 不能超过 50 个字符" data-val-length-max="50" id="UserIP" name="UserIP" type="hidden" value="106.117.116.150" /><input data-val="true" data-val-date="字段 评论日期 必须是日期。" data-val-required="评论日期 字段是必需的。" id="CreationDate" name="CreationDate" type="hidden" value="2016/10/25 22:46:51" />	<div class="form-horizontal">
+
+		<div class="form-group">
+			<div class="col-md-12">
+				<textarea class="form-control" cols="5" data-val="true" data-val-required="评论 必填" editor="kindeditor" editorheight="180" editortheme="simple" editorwidth="100%" id="Content" name="Content" rows="5">
+</textarea>
+				<span class="field-validation-valid text-danger" data-valmsg-for="Content" data-valmsg-replace="true"></span>
+			</div>
+		</div>
+
+		<div class="form-group">
+			<div class="col-md-4 col-sm-5 col-xs-6">
+				<input class="form-control text-box single-line" data-val="true" data-val-length="长度范围在 2~10 之间" data-val-length-max="10" data-val-length-min="2" data-val-required="用户名 必填" id="UserName" name="UserName" placeholder="昵称" type="text" value="" />
+				<span class="field-validation-valid text-danger" data-valmsg-for="UserName" data-valmsg-replace="true"></span>
+			</div>
+			<div class="col-md-8 col-sm-7 col-xs-6 text-right">
+				<button type="submit" class="btn btn-primary segmdl2 segmdl2-Send"> 提交评论</button>
+			</div>
+		</div>
+
+	</div>
+</form>
+					</div>
+					<section id="comments">
+						
+	<div class="media">
+		<a class="pull-left" href="javascript:;">
+			<img class="media-object img-circle" src="../../Images/shiguang_avatar.png" tppabs="http://www.5shiguang.net/Images/shiguang_avatar.png" width="48" alt="wewewe" />
+		</a>
+		<div Class="media-body">
+			<h4 Class="media-heading">
+				wewewe
+				<small> 3 天前</small>
+			</h4>
+			<div><a href="javascript:if(confirm(%27http://www.5shiguang.net/News/Details/12334  \n\nThis file was not retrieved by Teleport Pro, because it is linked too far away from its Starting Address. If you increase the in-domain depth setting for the Starting Address, this file will be queued for retrieval.  \n\nDo you want to open it from the server?%27))window.location=%27http://www.5shiguang.net/News/Details/12334%27" tppabs="http://www.5shiguang.net/News/Details/12334"><a/></div>
+		</div>
+	</div>
+	<div class="media">
+		<a class="pull-left" href="javascript:;">
+			<img class="media-object img-circle" src="../../Images/shiguang_avatar.png" tppabs="http://www.5shiguang.net/Images/shiguang_avatar.png" width="48" alt="werqwer" />
+		</a>
+		<div Class="media-body">
+			<h4 Class="media-heading">
+				werqwer
+				<small> 3 天前</small>
+			</h4>
+			<div>&lt;a href="12334"&gt;&lt;a/&gt;</div>
+		</div>
+	</div>
+
+<div class="text-center">
+	
+<!--MvcPager v3.0 for ASP.NET MVC 4.0+ ©2015 时光网络科技 (http://www.5shiguang.com)-->
+<ul class="pagination" data-ajax="true" data-ajax-allowcache="false" data-ajax-enablehistorysupport="false" data-ajax-method="Get" data-ajax-update="#comments" data-invalidpageerrmsg="页索引无效" data-outrangeerrmsg="页索引超出范围" data-pagecount="1" data-pageparameter="page" data-pagerid="Webdiyer.MvcPager" data-urlformat="/News/Details/8bb96166-79f5-e511-9424-5ef3fcde9a37?page=__page__"></ul>
+<!--MvcPager v3.0 for ASP.NET MVC 4.0+ ©2015 时光网络科技 (http://www.5shiguang.com)-->
+
+</div>
+
+					</section>
+				</div>
+			</article>
+			<aside class="col-md-4"><form action="http://www.5shiguang.net/News/Search" autocomplete="off" class="mb30" method="post">	<div class="input-group">
+		<input class="form-control" id="Keyword" name="Keyword" placeholder="输入您的关键字进行搜索" type="text" value="" />
+		<span class="input-group-btn">
+			<button class="btn btn-info" type="button"><span class="segmdl2 segmdl2-Zoom"></span></button>
+		</span>
+	</div>
+</form>
+
+
+<div class="news-sidebar">
+	<div class="sidebar-title"><span class="segmdl2 segmdl2-List"></span> 新闻分类</div>
+	<hr>
+	<ul class="sidebar-list">
+			<li><a href="javascript:if(confirm(%27http://www.5shiguang.net/News/Category/cc0fefac-f3bd-e511-9e56-b8975a40f4f0  \n\nThis file was not retrieved by Teleport Pro, because it is linked too far away from its Starting Address. If you increase the in-domain depth setting for the Starting Address, this file will be queued for retrieval.  \n\nDo you want to open it from the server?%27))window.location=%27http://www.5shiguang.net/News/Category/cc0fefac-f3bd-e511-9e56-b8975a40f4f0%27" tppabs="http://www.5shiguang.net/News/Category/cc0fefac-f3bd-e511-9e56-b8975a40f4f0"><span class="segmdl2 segmdl2-ScrollChevronRightLegacy"></span>公司动态</a></li>
+			<li><a href="javascript:if(confirm(%27http://www.5shiguang.net/News/Category/83aaabb8-f3bd-e511-9e56-b8975a40f4f0  \n\nThis file was not retrieved by Teleport Pro, because it is linked too far away from its Starting Address. If you increase the in-domain depth setting for the Starting Address, this file will be queued for retrieval.  \n\nDo you want to open it from the server?%27))window.location=%27http://www.5shiguang.net/News/Category/83aaabb8-f3bd-e511-9e56-b8975a40f4f0%27" tppabs="http://www.5shiguang.net/News/Category/83aaabb8-f3bd-e511-9e56-b8975a40f4f0"><span class="segmdl2 segmdl2-ScrollChevronRightLegacy"></span>业界资讯</a></li>
+			<li><a href="javascript:if(confirm(%27http://www.5shiguang.net/News/Category/fb769399-1717-e611-9427-5cf3fce69a34  \n\nThis file was not retrieved by Teleport Pro, because it is linked too far away from its Starting Address. If you increase the in-domain depth setting for the Starting Address, this file will be queued for retrieval.  \n\nDo you want to open it from the server?%27))window.location=%27http://www.5shiguang.net/News/Category/fb769399-1717-e611-9427-5cf3fce69a34%27" tppabs="http://www.5shiguang.net/News/Category/fb769399-1717-e611-9427-5cf3fce69a34"><span class="segmdl2 segmdl2-ScrollChevronRightLegacy"></span>网络技术</a></li>
+	</ul>
+</div>
+
+
+<div class="news-sidebar">
+	<div class="sidebar-title"><span class="segmdl2 segmdl2-OpenWith"></span> 相关资讯</div>
+	<hr>
+		<div class="media">
+			<div class="media-left">
+				<a href="javascript:if(confirm(%27http://www.5shiguang.net/News/Details/c5c646f0-60c9-e511-9421-5ef3fcde9a37  \n\nThis file was not retrieved by Teleport Pro, because it is linked too far away from its Starting Address. If you increase the in-domain depth setting for the Starting Address, this file will be queued for retrieval.  \n\nDo you want to open it from the server?%27))window.location=%27http://www.5shiguang.net/News/Details/c5c646f0-60c9-e511-9421-5ef3fcde9a37%27" tppabs="http://www.5shiguang.net/News/Details/c5c646f0-60c9-e511-9421-5ef3fcde9a37"><img class="media-object" src="../../UploadFiles/2016-02/a80bd6ac-cf94-4f70-8953-9f181ff91cde.jpg" tppabs="http://www.5shiguang.net/UploadFiles/2016-02/a80bd6ac-cf94-4f70-8953-9f181ff91cde.jpg" alt="JavaScript Web云平台OS.js介绍"></a>
+			</div>
+			<div class="media-body">
+				<div class="media-heading"><a href="javascript:if(confirm(%27http://www.5shiguang.net/News/Details/c5c646f0-60c9-e511-9421-5ef3fcde9a37  \n\nThis file was not retrieved by Teleport Pro, because it is linked too far away from its Starting Address. If you increase the in-domain depth setting for the Starting Address, this file will be queued for retrieval.  \n\nDo you want to open it from the server?%27))window.location=%27http://www.5shiguang.net/News/Details/c5c646f0-60c9-e511-9421-5ef3fcde9a37%27" tppabs="http://www.5shiguang.net/News/Details/c5c646f0-60c9-e511-9421-5ef3fcde9a37">JavaScript Web云平台OS.js介绍</a></div>
+				<div>OS.js是一个浏览器的JavaScript Web桌面实现，它提供了完善的窗…</div>
+			</div>
+		</div>
+		<div class="media">
+			<div class="media-left">
+				<a href="javascript:if(confirm(%27http://www.5shiguang.net/News/Details/c57c6fb8-62be-e511-9421-5ef3fcde9a37  \n\nThis file was not retrieved by Teleport Pro, because it is linked too far away from its Starting Address. If you increase the in-domain depth setting for the Starting Address, this file will be queued for retrieval.  \n\nDo you want to open it from the server?%27))window.location=%27http://www.5shiguang.net/News/Details/c57c6fb8-62be-e511-9421-5ef3fcde9a37%27" tppabs="http://www.5shiguang.net/News/Details/c57c6fb8-62be-e511-9421-5ef3fcde9a37"><img class="media-object" src="../../../img.ithome.com/newsuploadfiles/2015/9/20150905_152731_862.jpg" tppabs="http://img.ithome.com/newsuploadfiles/2015/9/20150905_152731_862.jpg" alt="免费全能记事本Notepad++ 6.8.9下载：改进触屏支持"></a>
+			</div>
+			<div class="media-body">
+				<div class="media-heading"><a href="javascript:if(confirm(%27http://www.5shiguang.net/News/Details/c57c6fb8-62be-e511-9421-5ef3fcde9a37  \n\nThis file was not retrieved by Teleport Pro, because it is linked too far away from its Starting Address. If you increase the in-domain depth setting for the Starting Address, this file will be queued for retrieval.  \n\nDo you want to open it from the server?%27))window.location=%27http://www.5shiguang.net/News/Details/c57c6fb8-62be-e511-9421-5ef3fcde9a37%27" tppabs="http://www.5shiguang.net/News/Details/c57c6fb8-62be-e511-9421-5ef3fcde9a37">免费全能记事本Notepad++ 6.8.9…</a></div>
+				<div>免费全能代码文本编辑器Notepad++更新至6.8.9版，本次更新包含六…</div>
+			</div>
+		</div>
+		<div class="media">
+			<div class="media-left">
+				<a href="javascript:if(confirm(%27http://www.5shiguang.net/News/Details/518874d5-f9c6-e511-9421-5ef3fcde9a37  \n\nThis file was not retrieved by Teleport Pro, because it is linked too far away from its Starting Address. If you increase the in-domain depth setting for the Starting Address, this file will be queued for retrieval.  \n\nDo you want to open it from the server?%27))window.location=%27http://www.5shiguang.net/News/Details/518874d5-f9c6-e511-9421-5ef3fcde9a37%27" tppabs="http://www.5shiguang.net/News/Details/518874d5-f9c6-e511-9421-5ef3fcde9a37"><img class="media-object" src="../../../img.ithome.com/newsuploadfiles/2016/1/20160129_104122_8.jpg" tppabs="http://img.ithome.com/newsuploadfiles/2016/1/20160129_104122_8.jpg" alt="VS Code开源扩展TACO：支持三大平台混合应用开发"></a>
+			</div>
+			<div class="media-body">
+				<div class="media-heading"><a href="javascript:if(confirm(%27http://www.5shiguang.net/News/Details/518874d5-f9c6-e511-9421-5ef3fcde9a37  \n\nThis file was not retrieved by Teleport Pro, because it is linked too far away from its Starting Address. If you increase the in-domain depth setting for the Starting Address, this file will be queued for retrieval.  \n\nDo you want to open it from the server?%27))window.location=%27http://www.5shiguang.net/News/Details/518874d5-f9c6-e511-9421-5ef3fcde9a37%27" tppabs="http://www.5shiguang.net/News/Details/518874d5-f9c6-e511-9421-5ef3fcde9a37">VS Code开源扩展TACO：支持三大…</a></div>
+				<div>TACO是微软于2013年5月份推出的一款用于Visual Studio的Apache C…</div>
+			</div>
+		</div>
+		<div class="media">
+			<div class="media-left">
+				<a href="javascript:if(confirm(%27http://www.5shiguang.net/News/Details/c274e4a2-7cbe-e511-9421-5ef3fcde9a37  \n\nThis file was not retrieved by Teleport Pro, because it is linked too far away from its Starting Address. If you increase the in-domain depth setting for the Starting Address, this file will be queued for retrieval.  \n\nDo you want to open it from the server?%27))window.location=%27http://www.5shiguang.net/News/Details/c274e4a2-7cbe-e511-9421-5ef3fcde9a37%27" tppabs="http://www.5shiguang.net/News/Details/c274e4a2-7cbe-e511-9421-5ef3fcde9a37"><img class="media-object" src="../../../img.ithome.com/newsuploadfiles/2015/6/20150619_112929_568.jpg" tppabs="http://img.ithome.com/newsuploadfiles/2015/6/20150619_112929_568.jpg" alt="云适配：HTML5应用将在企业市场大放异彩"></a>
+			</div>
+			<div class="media-body">
+				<div class="media-heading"><a href="javascript:if(confirm(%27http://www.5shiguang.net/News/Details/c274e4a2-7cbe-e511-9421-5ef3fcde9a37  \n\nThis file was not retrieved by Teleport Pro, because it is linked too far away from its Starting Address. If you increase the in-domain depth setting for the Starting Address, this file will be queued for retrieval.  \n\nDo you want to open it from the server?%27))window.location=%27http://www.5shiguang.net/News/Details/c274e4a2-7cbe-e511-9421-5ef3fcde9a37%27" tppabs="http://www.5shiguang.net/News/Details/c274e4a2-7cbe-e511-9421-5ef3fcde9a37">云适配：HTML5应用将在企业市场…</a></div>
+				<div>2015年6月19日，第十三届中国国际软件和信息服务交易会在大连世…</div>
+			</div>
+		</div>
+		<div class="media">
+			<div class="media-left">
+				<a href="javascript:if(confirm(%27http://www.5shiguang.net/News/Details/487181d3-7be1-e511-9423-5ef3fcde9a37  \n\nThis file was not retrieved by Teleport Pro, because it is linked too far away from its Starting Address. If you increase the in-domain depth setting for the Starting Address, this file will be queued for retrieval.  \n\nDo you want to open it from the server?%27))window.location=%27http://www.5shiguang.net/News/Details/487181d3-7be1-e511-9423-5ef3fcde9a37%27" tppabs="http://www.5shiguang.net/News/Details/487181d3-7be1-e511-9423-5ef3fcde9a37"><img class="media-object" src="../../UploadFiles/2016-03/44e5abe3-0884-4c4d-9191-b35fa0ed866b.png" tppabs="http://www.5shiguang.net/UploadFiles/2016-03/44e5abe3-0884-4c4d-9191-b35fa0ed866b.png" alt="ASP.NET 5，MVC 6 与 Azure App Services 视频教程"></a>
+			</div>
+			<div class="media-body">
+				<div class="media-heading"><a href="javascript:if(confirm(%27http://www.5shiguang.net/News/Details/487181d3-7be1-e511-9423-5ef3fcde9a37  \n\nThis file was not retrieved by Teleport Pro, because it is linked too far away from its Starting Address. If you increase the in-domain depth setting for the Starting Address, this file will be queued for retrieval.  \n\nDo you want to open it from the server?%27))window.location=%27http://www.5shiguang.net/News/Details/487181d3-7be1-e511-9423-5ef3fcde9a37%27" tppabs="http://www.5shiguang.net/News/Details/487181d3-7be1-e511-9423-5ef3fcde9a37">ASP.NET 5，MVC 6 与 Azure App …</a></div>
+				<div>ASP.NET 5是下一代的ASP.NET平台，它不但能执行在Windows，它也…</div>
+			</div>
+		</div>
+</div>
+
+
+<div class="news-sidebar">
+	<div class="sidebar-title"><span class="segmdl2 segmdl2-Comment"></span> 精彩评论</div>
+	<hr>
+	<ul class="sidebar-list">
+			<li>
+				<p>周立波</p>
+				<p>我以为我的口才不错！！知道发现这个网站我才知道我只是一般般而…</p>
+			</li>
+			<li>
+				<p>习大大</p>
+				<p>听说马云让你去上班了    我也来看看    ，年轻人    还是到国防…</p>
+			</li>
+			<li>
+				<p>王健林</p>
+				<p>我儿子说你网站做的不错想让我招你       ，看来你们公司是实力…</p>
+			</li>
+			<li>
+				<p>哈哈</p>
+				<p>很好</p>
+			</li>
+			<li>
+				<p>漯河市长热线</p>
+				<p>漯河网络科技公司    我看就你家的网站做的不错!!我这有个百万的…</p>
+			</li>
+	</ul>
+</div>
+
+<!--百度推荐-->
+<div id="hm_t_92228" class="mb15"></div></aside>
+		</div>
+	</div>
+</section>
+
+
+
+
+
+	<footer class="footer"><div class="container clearfix">
+	<p class="pull-right"><a class="scroll-top toscroll" href="#" title="回顶部" style="display:none;"><span class="segmdl2 segmdl2-Up"></span></a></p>
+	<p class="pull-left wow bounceInLeft" data-wow-offset="0">Copyright ©2007-2016 时光网络科技 All Rights Reserved.</p>
+	<p class="pull-right wow bounceInRight" data-wow-offset="0">豫ICP备14021451号-1</p>
+</div>
+</footer>
+	<!-- Modal -->
+	<div class="modal fade" id="defaultModal" tabindex="-1" role="dialog">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" id="myModalLabel">标题</h4>
+				</div>
+				<div class="modal-body">无内容</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+					<button type="button" class="btn btn-primary">确定</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="../../bundles/jquery-v=cJOGGbMZQHnS5cOfAl-q4gQc_xmDPie7j6nXNNKnrl01.js" tppabs="http://www.5shiguang.net/bundles/jquery?v=cJOGGbMZQHnS5cOfAl-q4gQc_xmDPie7j6nXNNKnrl01"></script>
+
+	<script src="../../bundles/jqueryval-v=dt3XaqpEn4rFA9MkDy2QmR-5tTdUVpSHTuOr3x-Sw981.js" tppabs="http://www.5shiguang.net/bundles/jqueryval?v=dt3XaqpEn4rFA9MkDy2QmR-5tTdUVpSHTuOr3x-Sw981"></script>
+
+	<script src="../../bundles/bootstrap-v=-ktyuuYVm8reiCqek-REkH9kFQQZ53F1Ay-TXz9RIew1.js" tppabs="http://www.5shiguang.net/bundles/bootstrap?v=-ktyuuYVm8reiCqek-REkH9kFQQZ53F1Ay-TXz9RIew1"></script>
+
+<script type="text/javascript" src="../../fi000001.axd-d=gfskerflcaigxeu7pnthexa9cungfwepi8hfyqlseg9ivimbn5eusemmjnicbyrozmgzqfkgces9sdj-w0rwod6nijpyvhpdyflsvue0jhsqv5upljuajd3pf0iu3ye8xyqhptkxrlpw4vsfjaaf9yyw_ylaub2alxc14goe_-e1&t=635936539940000000.js" tppabs="http://www.5shiguang.net/WebResource.axd?d=GFSkErfLcAIgxEU7PntHexA9cunGfwEPi8HFyQLsEg9IViMbN5euSEMMJnicByROZmgZqFKgcES9Sdj-W0RWod6nIjpyvHpdyfLsVUE0jhSqv5upLjUaJd3Pf0IU3YE8XYQhptKxrLPW4vsfjAAf9yYw_Ylaub2aLxc14gOE_-E1&t=635936539940000000"></script>
+	
+<script type="text/javascript" src="../../WebResource.axd-d=ttTOKv16_JsV2BzpCwfSuZAIGnsVB0OGSF69Gs-sZtqeASddrEJBVyfJTZZ4y-OyPPKBBVQiTMZ5KuJxr28NA_nrgKgCAxctnDmxnSVYl1gFPFH7CtRb17eHCyYggITUJ2_c2h5ZhGgyWSnAe0VQ7A2&t=635936539940000000.js" tppabs="http://www.5shiguang.net/WebResource.axd?d=ttTOKv16_JsV2BzpCwfSuZAIGnsVB0OGSF69Gs-sZtqeASddrEJBVyfJTZZ4y-OyPPKBBVQiTMZ5KuJxr28NA_nrgKgCAxctnDmxnSVYl1gFPFH7CtRb17eHCyYggITUJ2_c2h5ZhGgyWSnAe0VQ7A2&t=635936539940000000"></script>
+	<script src="../../Scripts/Kindeditor/kindeditor-all-min.js" tppabs="http://www.5shiguang.net/Scripts/Kindeditor/kindeditor-all-min.js"></script>
+	<script src="../../Scripts/Kindeditor/kindeditor.config.js" tppabs="http://www.5shiguang.net/Scripts/Kindeditor/kindeditor.config.js"></script>
+	<script src="../../Scripts/Kindeditor/plugins/code/prettify.js" tppabs="http://www.5shiguang.net/Scripts/Kindeditor/plugins/code/prettify.js"></script>
+	<script>
+		var onCommentBegin = function () {
+			$('#commentForm button[type="submit"]').attr('disabled', 'disabled');
+		}
+		var onCommentSuccess = function () {
+			$.get('/News/Details/8bb96166-79f5-e511-9424-5ef3fcde9a37', null, function (html) {
+				$('form#commentForm').get(0).reset();
+				KindEditor.instances[0].html('');
+				$('#commentForm button[type="submit"]').removeAttr('disabled');
+				$('section#comments').html(html);
+			})
+		}
+		$(function () { prettyPrint() })
+	</script>
+
+	<script src="../../Scripts/wow.min.js" tppabs="http://www.5shiguang.net/Scripts/wow.min.js"></script>
+	<script>
+		//wow
+		new WOW({ animateClass: 'animated', offset: 0 }).init();
+		//toScroll
+		$('a.toscroll').bind('click', function (e) {
+			var $this = $(this), id = $this.attr('href');
+			var offset = $(id) && $(id).length ? $(id).offset().top : 0;
+			$('html,body').stop().animate({ scrollTop: offset }, 1200, 'easeInOutExpo');
+			e.preventDefault();
+		})
+		//scrollTop
+		$(window).scroll(function () {
+			($(this).scrollTop() >= 200) ? $('.scroll-top').fadeIn(300) : $('.scroll-top').fadeOut(300);
+		});
+		//百度推送
+		(function () {
+			var s = document.getElementsByTagName("script")[0];
+			var bp = document.createElement('script');
+			bp.src = '../../../push.zhanzhang.baidu.com/push.js'/*tpa=http://push.zhanzhang.baidu.com/push.js*/;
+			s.parentNode.insertBefore(bp, s);
+		})();
+	</script>
+	<!--百度统计-->
+	<script>
+		var _hmt = _hmt || [];
+		(function () {
+			var hm = document.createElement("script");
+			hm.src = "../../../hm.baidu.com/hm.js-08f070d846e7c32a036e47f9df0f362a.js"/*tpa=http://hm.baidu.com/hm.js?08f070d846e7c32a036e47f9df0f362a*/;
+			var s = document.getElementsByTagName("script")[0];
+			s.parentNode.insertBefore(hm, s);
+		})();
+	</script>
+</body>
+</html>

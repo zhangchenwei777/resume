@@ -1,0 +1,429 @@
+
+
+<!DOCTYPE html>
+
+<html lang="zh-cn">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta name="keywords" content="IIS,Serv-U,解决 IIS 和 Serv-U 端口冲突的问题,漯河时光网络科技有限公司">
+	<meta name="description" content="服务器情况：服务器上IIS配置的是网站，ftp服务器采用的是Serv-U，用于文件上传。症状：总是看到Serv-U的图标有黄色感叹号出现，而且IIS中的网站在运行一段时间后，莫名其妙地会变成Serv-U的管理界面；重启IIS服务，…">
+	<meta name="author" content="漯河时光网络科技有限公司">
+	<title>解决 IIS 和 Serv-U 端口冲突的问题_公司动态_资讯中心_漯河时光网络科技有限公司</title>
+	<link href="../../Content/shiguang-v=2KuUzExbd1qVFeys1bM9cZr-yMK4rB8IT5OSDIuRMio1.css" tppabs="http://www.5shiguang.net/Content/shiguang?v=2KuUzExbd1qVFeys1bM9cZr-yMK4rB8IT5OSDIuRMio1" rel="stylesheet"/>
+
+	<script src="../../bundles/modernizr-v=w9fZKPSiHtN4N4FRqV7jn-3kGoQY5hHpkwFv5TfMrus1.js" tppabs="http://www.5shiguang.net/bundles/modernizr?v=w9fZKPSiHtN4N4FRqV7jn-3kGoQY5hHpkwFv5TfMrus1"></script>
+
+	
+	<link href="../../Scripts/Kindeditor/plugins/code/prettify.css" tppabs="http://www.5shiguang.net/Scripts/Kindeditor/plugins/code/prettify.css" rel="stylesheet" />
+
+</head>
+<body>
+	<div class="hidden"><img src="../../Images/logo_baidu.jpg" tppabs="http://www.5shiguang.net/Images/logo_baidu.jpg" width="121" height="75" alt="漯河时光网络科技有限公司_logo" title="漯河时光网络科技有限公司" /></div>
+	
+<nav class="navbar navbar-default navbar-shiguang navbar-shiguang-sm navbar-fixed-top">
+	<div class="container-fluid">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" aria-expanded="false" data-target=".navbar-collapse">
+				<span class="sr-only">导航</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="../../index.htm" tppabs="http://www.5shiguang.net/"><img src="../../Images/shiguang_logo-250x50.png" tppabs="http://www.5shiguang.net/Images/shiguang_logo-250x50.png" alt="漯河时光网络科技有限公司" title="漯河时光网络科技有限公司" /></a>
+		</div>
+		<div class="navbar-collapse collapse">
+			<ul class="nav navbar-nav navbar-respond">
+				<li class=""><a href="../../index.htm" tppabs="http://www.5shiguang.net/">首页</a></li>
+				<li class="active"><a href="../../News.htm" tppabs="http://www.5shiguang.net/News">资讯</a></li>
+				<li class=""><a href="javascript:if(confirm(%27http://www.5shiguang.net/Services  \n\nThis file was not retrieved by Teleport Pro, because it is linked too far away from its Starting Address. If you increase the in-domain depth setting for the Starting Address, this file will be queued for retrieval.  \n\nDo you want to open it from the server?%27))window.location=%27http://www.5shiguang.net/Services%27" tppabs="http://www.5shiguang.net/Services">产品服务</a></li>
+				<li class=""><a href="javascript:if(confirm(%27http://www.5shiguang.net/Solutions  \n\nThis file was not retrieved by Teleport Pro, because it is linked too far away from its Starting Address. If you increase the in-domain depth setting for the Starting Address, this file will be queued for retrieval.  \n\nDo you want to open it from the server?%27))window.location=%27http://www.5shiguang.net/Solutions%27" tppabs="http://www.5shiguang.net/Solutions">方案</a></li>
+				<li class=""><a href="../../Jobs.htm" tppabs="http://www.5shiguang.net/Jobs">招聘</a></li>
+				<li class=""><a href="../../index.htm#contacts" tppabs="http://www.5shiguang.net/#contacts">联系</a></li>
+			</ul>
+			<ul class="nav navbar-nav navbar-right">
+				<li><a href="tel:400-6650-361" title="全国统一客服热线：400-6650-361"><span class="segmdl2 segmdl2-Phone"></span> 400-6650-361</a></li>
+			</ul>
+		</div>
+	</div>
+</nav>
+
+	
+
+<div class="hidden"><img src="../../UploadFiles/2016-04/1ffa30a2-f6f7-4026-ab98-8a42a4ef2be7.jpg.png" tppabs="http://www.5shiguang.net/UploadFiles/2016-04/1ffa30a2-f6f7-4026-ab98-8a42a4ef2be7.jpg" title="解决 IIS 和 Serv-U 端口冲突的问题" alt="解决 IIS 和 Serv-U 端口冲突的问题" /></div>
+<section class="banner">
+	<img src="../../Images/banners/banner-news.jpg" tppabs="http://www.5shiguang.net/Images/banners/banner-news.jpg" alt="news" class="banner-img" />
+	<div class="banner-content">
+		<div class="container">
+			<h1 class="wow bounceInRight">紧跟科技步伐，<span class="highlight">与时俱进</span>！</h1>
+			<p class="lead wow bounceInRight" data-wow-delay="0.5s">Keeping up with the pace of technology, advancing with the times!</p>
+		</div>
+	</div>
+</section>
+
+
+<section class="body-content">
+	<div class="container">
+
+		<ol class="breadcrumb">
+			<li class="active">当前位置：</li>
+			<li><a href="../../index.htm" tppabs="http://www.5shiguang.net/">首页</a></li>
+			<li><a href="../../News.htm" tppabs="http://www.5shiguang.net/News">资讯中心</a></li>
+			<li><a href="javascript:if(confirm(%27http://www.5shiguang.net/News/Category/cc0fefac-f3bd-e511-9e56-b8975a40f4f0  \n\nThis file was not retrieved by Teleport Pro, because it is linked too far away from its Starting Address. If you increase the in-domain depth setting for the Starting Address, this file will be queued for retrieval.  \n\nDo you want to open it from the server?%27))window.location=%27http://www.5shiguang.net/News/Category/cc0fefac-f3bd-e511-9e56-b8975a40f4f0%27" tppabs="http://www.5shiguang.net/News/Category/cc0fefac-f3bd-e511-9e56-b8975a40f4f0">公司动态</a></li>
+			<li class="active hidden-xs">解决 IIS 和 Serv-U 端口冲突的问题</li>
+		</ol>
+
+		<div class="row">
+			<article class="col-md-8 news-item">
+				<h3 class="page-header sidebar-title">解决 IIS 和 Serv-U 端口冲突的问题</h3>
+				<div class="news-info clearfix">
+					<div class="pull-right">
+						<span class="news-info-item"><span class="segmdl2 segmdl2-pointer"></span> 5674</span>
+						<a href="#comments" class="news-info-item toscroll"><span class="segmdl2 segmdl2-Comment"></span> 6</a>
+					</div>
+					<span class="news-info-item"><span class="segmdl2 segmdl2-CalendarDay"></span> 2016-04-05</span>
+					<span class="news-info-item"><span class="segmdl2 segmdl2-Contact"></span> Dodu</span>
+					<a href="javascript:if(confirm(%27http://www.5shiguang.net/News/Category/cc0fefac-f3bd-e511-9e56-b8975a40f4f0  \n\nThis file was not retrieved by Teleport Pro, because it is linked too far away from its Starting Address. If you increase the in-domain depth setting for the Starting Address, this file will be queued for retrieval.  \n\nDo you want to open it from the server?%27))window.location=%27http://www.5shiguang.net/News/Category/cc0fefac-f3bd-e511-9e56-b8975a40f4f0%27" tppabs="http://www.5shiguang.net/News/Category/cc0fefac-f3bd-e511-9e56-b8975a40f4f0" class="news-info-item"><span class="segmdl2 segmdl2-List"></span> 公司动态</a>
+				</div>
+				<div class="news-content"><p>
+	<strong>服务器情况</strong>：服务器上IIS配置的是网站，ftp服务器采用的是Serv-U，用于文件上传。
+</p>
+<p>
+	<strong>症状</strong>：总是看到Serv-U的图标有黄色感叹号出现，而且IIS中的网站在运行一段时间后，莫名其妙地会变成Serv-U的管理界面；重启IIS服务，IIS提示“另一个程序正在使用此文件，进程无法访问”，这就说明IIS的80端口被Serv-U抢占了。
+</p>
+<p>
+	<strong>原因</strong>：Serv-U与IIS冲突的原因是与IIS抢占80和443端口。Serv-U 从7.0版本以后增加了通过Web方式管理服务器端的功能，默认情况下管理端口是80,如果用https的话则是443。很多人在安装的时候没太注意，默认情况下开启了80和443端口的监听，如果你的这台服务器上有IIS在运行的话，便会造成冲突。<br />
+冲突的现象主要表现在两个方面，一是Serv-U的系统托盘图标上不停地出现黄色的惊叹号警告。这种情况一般表示Serv-U没有抢占到80端口；另一种现象是在重启机器时，有时Serv-U抢先抢占到80端口，造成IIS无法启动，这时你访问网站时便会出现Serv-U的管理登录界面。
+</p>
+<p>
+	<strong>解决方案</strong>：解决这个问题的方法是禁止Serv-U监听80和443端口。
+</p>
+<p>
+	设置方法如下：打开Serv-U管理控制台，进入“域详细信息”中的“监听器”界面中，你可以删除80端口的监听，如果你需要Web方式来管理的话，也可以把80端口改成其他的端口。
+</p>
+<p style="text-align:center;">
+	<img src="../../UploadFiles/2016-04/1ffa30a2-f6f7-4026-ab98-8a42a4ef2be7.jpg.png" tppabs="http://www.5shiguang.net/UploadFiles/2016-04/1ffa30a2-f6f7-4026-ab98-8a42a4ef2be7.jpg" /> 
+</p></div>
+				<hr />
+				<!--news tags-->
+				<div class="tags">
+					<ul class="news-tags">
+						<li>关键词：</li>
+							<li class="news-tag"><a href="javascript:if(confirm(%27http://www.5shiguang.net/News/Tag/IIS  \n\nThis file was not retrieved by Teleport Pro, because it is linked too far away from its Starting Address. If you increase the in-domain depth setting for the Starting Address, this file will be queued for retrieval.  \n\nDo you want to open it from the server?%27))window.location=%27http://www.5shiguang.net/News/Tag/IIS%27" tppabs="http://www.5shiguang.net/News/Tag/IIS">IIS</a></li>
+							<li class="news-tag"><a href="javascript:if(confirm(%27http://www.5shiguang.net/News/Tag/Serv-U  \n\nThis file was not retrieved by Teleport Pro, because it is linked too far away from its Starting Address. If you increase the in-domain depth setting for the Starting Address, this file will be queued for retrieval.  \n\nDo you want to open it from the server?%27))window.location=%27http://www.5shiguang.net/News/Tag/Serv-U%27" tppabs="http://www.5shiguang.net/News/Tag/Serv-U">Serv-U</a></li>
+					</ul>
+				</div>
+				<!--baidu分享-->
+				<div class="news-share">
+					<div class="bdsharebuttonbox shiguang-share-box">
+						<a href="javascript:;" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+						<a href="javascript:;" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+						<a href="javascript:;" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+					</div>
+					<script>window._bd_share_config = { "common": { "bdSnsKey": {}, "bdText": "", "bdMini": "2", "bdMiniList": ["renren", "kaixin001", "tqf", "tieba", "douban", "mail", "ty", "evernotecn", "copy", "print"], "bdPic": "", "bdStyle": "1", "bdSize": "16" }, "share": {}, "image": { "viewList": ["qzone", "tsina", "tqq", "sqq", "weixin", "fbook", "twi", "linkedin"], "viewText": "分享到：", "viewSize": "16" } }; with (document) 0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion=' + ~(-new Date() / 36e5)];</script>
+				</div>
+				<!-- news Comments -->
+				<div class="comments1">
+					<div class="well mb30">
+						<h4>发表评论：</h4>
+						
+<form action="http://www.5shiguang.net/News/Comment" autocomplete="off" data-ajax="true" data-ajax-begin="onCommentBegin" data-ajax-failure="onFailure" data-ajax-method="Post" data-ajax-success="onCommentSuccess" id="commentForm" method="post" role="form"><input name="__RequestVerificationToken" type="hidden" value="u-0m_d-scMQ_NsxU38kNxi7KAuX92hvLcqhujCzsV8dPRO_socyYX3Er47X45GXbAL5_iddxLdGUNk5G9_7IKnXNla6I0xxUTvYn-LiuHkQ1" /><input data-val="true" data-val-required="ID 字段是必需的。" id="ID" name="ID" type="hidden" value="66ee805a-3ffb-e511-9425-5ef3fcde9a37" /><input data-val="true" data-val-required="资讯 必填" id="NewsID" name="NewsID" type="hidden" value="66ee805a-3ffb-e511-9425-5ef3fcde9a37" /><input data-val="true" data-val-number="字段 同意 必须是一个数字。" data-val-required="同意 字段是必需的。" id="Agree" name="Agree" type="hidden" value="0" /><input data-val="true" data-val-number="字段 反对 必须是一个数字。" data-val-required="反对 字段是必需的。" id="DisAgree" name="DisAgree" type="hidden" value="0" /><input data-val="true" data-val-length="IP地址 不能超过 50 个字符" data-val-length-max="50" id="UserIP" name="UserIP" type="hidden" value="106.117.116.150" /><input data-val="true" data-val-date="字段 评论日期 必须是日期。" data-val-required="评论日期 字段是必需的。" id="CreationDate" name="CreationDate" type="hidden" value="2016/10/25 22:46:49" />	<div class="form-horizontal">
+
+		<div class="form-group">
+			<div class="col-md-12">
+				<textarea class="form-control" cols="5" data-val="true" data-val-required="评论 必填" editor="kindeditor" editorheight="180" editortheme="simple" editorwidth="100%" id="Content" name="Content" rows="5">
+</textarea>
+				<span class="field-validation-valid text-danger" data-valmsg-for="Content" data-valmsg-replace="true"></span>
+			</div>
+		</div>
+
+		<div class="form-group">
+			<div class="col-md-4 col-sm-5 col-xs-6">
+				<input class="form-control text-box single-line" data-val="true" data-val-length="长度范围在 2~10 之间" data-val-length-max="10" data-val-length-min="2" data-val-required="用户名 必填" id="UserName" name="UserName" placeholder="昵称" type="text" value="" />
+				<span class="field-validation-valid text-danger" data-valmsg-for="UserName" data-valmsg-replace="true"></span>
+			</div>
+			<div class="col-md-8 col-sm-7 col-xs-6 text-right">
+				<button type="submit" class="btn btn-primary segmdl2 segmdl2-Send"> 提交评论</button>
+			</div>
+		</div>
+
+	</div>
+</form>
+					</div>
+					<section id="comments">
+						
+	<div class="media">
+		<a class="pull-left" href="javascript:;">
+			<img class="media-object img-circle" src="../../Images/shiguang_avatar.png" tppabs="http://www.5shiguang.net/Images/shiguang_avatar.png" width="48" alt="卖女孩的小火材" />
+		</a>
+		<div Class="media-body">
+			<h4 Class="media-heading">
+				卖女孩的小火材
+				<small> 2016-07-06</small>
+			</h4>
+			<div><p>
+	你们是漯河时光网络科技公司吗？？？
+</p>
+<p>
+	我想制作一个比较不错
+</p>
+<p>
+	的网站 请帮帮我、！！
+</p></div>
+		</div>
+	</div>
+	<div class="media">
+		<a class="pull-left" href="javascript:;">
+			<img class="media-object img-circle" src="../../Images/shiguang_avatar.png" tppabs="http://www.5shiguang.net/Images/shiguang_avatar.png" width="48" alt="漯河市长热线" />
+		</a>
+		<div Class="media-body">
+			<h4 Class="media-heading">
+				漯河市长热线
+				<small> 2016-07-06</small>
+			</h4>
+			<div><p>
+	<span style="font-size:24px;font-family:KaiTi_GB2312;">漯河网络科技公司&nbsp; 我看就你家的网站做的不错!!我这有个百万的项目&nbsp; 。来吧！！！</span>
+</p></div>
+		</div>
+	</div>
+	<div class="media">
+		<a class="pull-left" href="javascript:;">
+			<img class="media-object img-circle" src="../../Images/shiguang_avatar.png" tppabs="http://www.5shiguang.net/Images/shiguang_avatar.png" width="48" alt="啥吩咐" />
+		</a>
+		<div Class="media-body">
+			<h4 Class="media-heading">
+				啥吩咐
+				<small> 2016-04-27</small>
+			</h4>
+			<div>不错不错<br /></div>
+		</div>
+	</div>
+	<div class="media">
+		<a class="pull-left" href="javascript:;">
+			<img class="media-object img-circle" src="../../Images/shiguang_avatar.png" tppabs="http://www.5shiguang.net/Images/shiguang_avatar.png" width="48" alt="妮妮" />
+		</a>
+		<div Class="media-body">
+			<h4 Class="media-heading">
+				妮妮
+				<small> 2016-04-15</small>
+			</h4>
+			<div>和任何人</div>
+		</div>
+	</div>
+	<div class="media">
+		<a class="pull-left" href="javascript:;">
+			<img class="media-object img-circle" src="../../Images/shiguang_avatar.png" tppabs="http://www.5shiguang.net/Images/shiguang_avatar.png" width="48" alt="妮妮" />
+		</a>
+		<div Class="media-body">
+			<h4 Class="media-heading">
+				妮妮
+				<small> 2016-04-15</small>
+			</h4>
+			<div>呵呵<br /></div>
+		</div>
+	</div>
+
+<div class="text-center">
+	
+<!--MvcPager v3.0 for ASP.NET MVC 4.0+ ©2015 时光网络科技 (http://www.5shiguang.com)-->
+<ul class="pagination" data-ajax="true" data-ajax-allowcache="false" data-ajax-enablehistorysupport="false" data-ajax-method="Get" data-ajax-update="#comments" data-invalidpageerrmsg="页索引无效" data-outrangeerrmsg="页索引超出范围" data-pagecount="2" data-pageparameter="page" data-pagerid="Webdiyer.MvcPager" data-urlformat="/News/Details/66ee805a-3ffb-e511-9425-5ef3fcde9a37?page=__page__"><li class="disabled"><a>&laquo;</a></li><li class="disabled"><a>&lsaquo;</a></li><li class="active num-item"><a>1<span class="sr-only">(current)</span></a></li><li class="num-item"><a data-pageindex="2" href="javascript:if(confirm(%27http://www.5shiguang.net/News/Details/66ee805a-3ffb-e511-9425-5ef3fcde9a37?page=2  \n\nThis file was not retrieved by Teleport Pro, because it is linked too far away from its Starting Address. If you increase the in-domain depth setting for the Starting Address, this file will be queued for retrieval.  \n\nDo you want to open it from the server?%27))window.location=%27http://www.5shiguang.net/News/Details/66ee805a-3ffb-e511-9425-5ef3fcde9a37?page=2%27" tppabs="http://www.5shiguang.net/News/Details/66ee805a-3ffb-e511-9425-5ef3fcde9a37?page=2">2</a></li><li><a data-pageindex="2" href="javascript:if(confirm(%27http://www.5shiguang.net/News/Details/66ee805a-3ffb-e511-9425-5ef3fcde9a37?page=2  \n\nThis file was not retrieved by Teleport Pro, because it is linked too far away from its Starting Address. If you increase the in-domain depth setting for the Starting Address, this file will be queued for retrieval.  \n\nDo you want to open it from the server?%27))window.location=%27http://www.5shiguang.net/News/Details/66ee805a-3ffb-e511-9425-5ef3fcde9a37?page=2%27" tppabs="http://www.5shiguang.net/News/Details/66ee805a-3ffb-e511-9425-5ef3fcde9a37?page=2">&rsaquo;</a></li><li><a data-pageindex="2" href="javascript:if(confirm(%27http://www.5shiguang.net/News/Details/66ee805a-3ffb-e511-9425-5ef3fcde9a37?page=2  \n\nThis file was not retrieved by Teleport Pro, because it is linked too far away from its Starting Address. If you increase the in-domain depth setting for the Starting Address, this file will be queued for retrieval.  \n\nDo you want to open it from the server?%27))window.location=%27http://www.5shiguang.net/News/Details/66ee805a-3ffb-e511-9425-5ef3fcde9a37?page=2%27" tppabs="http://www.5shiguang.net/News/Details/66ee805a-3ffb-e511-9425-5ef3fcde9a37?page=2">&raquo;</a></li></ul>
+<!--MvcPager v3.0 for ASP.NET MVC 4.0+ ©2015 时光网络科技 (http://www.5shiguang.com)-->
+
+</div>
+
+					</section>
+				</div>
+			</article>
+			<aside class="col-md-4"><form action="http://www.5shiguang.net/News/Search" autocomplete="off" class="mb30" method="post">	<div class="input-group">
+		<input class="form-control" id="Keyword" name="Keyword" placeholder="输入您的关键字进行搜索" type="text" value="" />
+		<span class="input-group-btn">
+			<button class="btn btn-info" type="button"><span class="segmdl2 segmdl2-Zoom"></span></button>
+		</span>
+	</div>
+</form>
+
+
+<div class="news-sidebar">
+	<div class="sidebar-title"><span class="segmdl2 segmdl2-List"></span> 新闻分类</div>
+	<hr>
+	<ul class="sidebar-list">
+			<li><a href="javascript:if(confirm(%27http://www.5shiguang.net/News/Category/cc0fefac-f3bd-e511-9e56-b8975a40f4f0  \n\nThis file was not retrieved by Teleport Pro, because it is linked too far away from its Starting Address. If you increase the in-domain depth setting for the Starting Address, this file will be queued for retrieval.  \n\nDo you want to open it from the server?%27))window.location=%27http://www.5shiguang.net/News/Category/cc0fefac-f3bd-e511-9e56-b8975a40f4f0%27" tppabs="http://www.5shiguang.net/News/Category/cc0fefac-f3bd-e511-9e56-b8975a40f4f0"><span class="segmdl2 segmdl2-ScrollChevronRightLegacy"></span>公司动态</a></li>
+			<li><a href="javascript:if(confirm(%27http://www.5shiguang.net/News/Category/83aaabb8-f3bd-e511-9e56-b8975a40f4f0  \n\nThis file was not retrieved by Teleport Pro, because it is linked too far away from its Starting Address. If you increase the in-domain depth setting for the Starting Address, this file will be queued for retrieval.  \n\nDo you want to open it from the server?%27))window.location=%27http://www.5shiguang.net/News/Category/83aaabb8-f3bd-e511-9e56-b8975a40f4f0%27" tppabs="http://www.5shiguang.net/News/Category/83aaabb8-f3bd-e511-9e56-b8975a40f4f0"><span class="segmdl2 segmdl2-ScrollChevronRightLegacy"></span>业界资讯</a></li>
+			<li><a href="javascript:if(confirm(%27http://www.5shiguang.net/News/Category/fb769399-1717-e611-9427-5cf3fce69a34  \n\nThis file was not retrieved by Teleport Pro, because it is linked too far away from its Starting Address. If you increase the in-domain depth setting for the Starting Address, this file will be queued for retrieval.  \n\nDo you want to open it from the server?%27))window.location=%27http://www.5shiguang.net/News/Category/fb769399-1717-e611-9427-5cf3fce69a34%27" tppabs="http://www.5shiguang.net/News/Category/fb769399-1717-e611-9427-5cf3fce69a34"><span class="segmdl2 segmdl2-ScrollChevronRightLegacy"></span>网络技术</a></li>
+	</ul>
+</div>
+
+
+<div class="news-sidebar">
+	<div class="sidebar-title"><span class="segmdl2 segmdl2-OpenWith"></span> 相关资讯</div>
+	<hr>
+		<div class="media">
+			<div class="media-left">
+				<a href="javascript:if(confirm(%27http://www.5shiguang.net/News/Details/c5f9bd3e-61c9-e511-9421-5ef3fcde9a37  \n\nThis file was not retrieved by Teleport Pro, because it is linked too far away from its Starting Address. If you increase the in-domain depth setting for the Starting Address, this file will be queued for retrieval.  \n\nDo you want to open it from the server?%27))window.location=%27http://www.5shiguang.net/News/Details/c5f9bd3e-61c9-e511-9421-5ef3fcde9a37%27" tppabs="http://www.5shiguang.net/News/Details/c5f9bd3e-61c9-e511-9421-5ef3fcde9a37"><img class="media-object" src="../../../www.h5cn.com/uploads/allimg/150916/110G56432_0.png" tppabs="http://www.h5cn.com/uploads/allimg/150916/110G56432_0.png" alt="开发一款原生移动App需要多长时间？"></a>
+			</div>
+			<div class="media-body">
+				<div class="media-heading"><a href="javascript:if(confirm(%27http://www.5shiguang.net/News/Details/c5f9bd3e-61c9-e511-9421-5ef3fcde9a37  \n\nThis file was not retrieved by Teleport Pro, because it is linked too far away from its Starting Address. If you increase the in-domain depth setting for the Starting Address, this file will be queued for retrieval.  \n\nDo you want to open it from the server?%27))window.location=%27http://www.5shiguang.net/News/Details/c5f9bd3e-61c9-e511-9421-5ef3fcde9a37%27" tppabs="http://www.5shiguang.net/News/Details/c5f9bd3e-61c9-e511-9421-5ef3fcde9a37">开发一款原生移动App需要多长时…</a></div>
+				<div>近年来移动应用的数量正在以几何级数增长，2013年底，两大移动应…</div>
+			</div>
+		</div>
+		<div class="media">
+			<div class="media-left">
+				<a href="javascript:if(confirm(%27http://www.5shiguang.net/News/Details/ccc236a8-b8e9-e511-9424-5ef3fcde9a37  \n\nThis file was not retrieved by Teleport Pro, because it is linked too far away from its Starting Address. If you increase the in-domain depth setting for the Starting Address, this file will be queued for retrieval.  \n\nDo you want to open it from the server?%27))window.location=%27http://www.5shiguang.net/News/Details/ccc236a8-b8e9-e511-9424-5ef3fcde9a37%27" tppabs="http://www.5shiguang.net/News/Details/ccc236a8-b8e9-e511-9424-5ef3fcde9a37"><img class="media-object" src="../../UploadFiles/2016-03/e85ae08d-6b9c-4327-9809-2faf59354ae9.jpg" tppabs="http://www.5shiguang.net/UploadFiles/2016-03/e85ae08d-6b9c-4327-9809-2faf59354ae9.jpg" alt="为Win10 DX12而生：《古墓丽影：崛起》PC版迎重磅更新"></a>
+			</div>
+			<div class="media-body">
+				<div class="media-heading"><a href="javascript:if(confirm(%27http://www.5shiguang.net/News/Details/ccc236a8-b8e9-e511-9424-5ef3fcde9a37  \n\nThis file was not retrieved by Teleport Pro, because it is linked too far away from its Starting Address. If you increase the in-domain depth setting for the Starting Address, this file will be queued for retrieval.  \n\nDo you want to open it from the server?%27))window.location=%27http://www.5shiguang.net/News/Details/ccc236a8-b8e9-e511-9424-5ef3fcde9a37%27" tppabs="http://www.5shiguang.net/News/Details/ccc236a8-b8e9-e511-9424-5ef3fcde9a37">为Win10 DX12而生：《古墓丽影：…</a></div>
+				<div>今天《古墓丽影：崛起》游戏开发商为PC版发布了一项重要更新，特…</div>
+			</div>
+		</div>
+		<div class="media">
+			<div class="media-left">
+				<a href="javascript:if(confirm(%27http://www.5shiguang.net/News/Details/7d0d022d-fef6-e511-9424-5ef3fcde9a37  \n\nThis file was not retrieved by Teleport Pro, because it is linked too far away from its Starting Address. If you increase the in-domain depth setting for the Starting Address, this file will be queued for retrieval.  \n\nDo you want to open it from the server?%27))window.location=%27http://www.5shiguang.net/News/Details/7d0d022d-fef6-e511-9424-5ef3fcde9a37%27" tppabs="http://www.5shiguang.net/News/Details/7d0d022d-fef6-e511-9424-5ef3fcde9a37"><img class="media-object" src="../../UploadFiles/2016-03/33fa9b35-1ea4-4d07-ba36-f448d0823198.jpg" tppabs="http://www.5shiguang.net/UploadFiles/2016-03/33fa9b35-1ea4-4d07-ba36-f448d0823198.jpg" alt="Win10年度更新SDK预览版下载：UWP应用都可支持扩展"></a>
+			</div>
+			<div class="media-body">
+				<div class="media-heading"><a href="javascript:if(confirm(%27http://www.5shiguang.net/News/Details/7d0d022d-fef6-e511-9424-5ef3fcde9a37  \n\nThis file was not retrieved by Teleport Pro, because it is linked too far away from its Starting Address. If you increase the in-domain depth setting for the Starting Address, this file will be queued for retrieval.  \n\nDo you want to open it from the server?%27))window.location=%27http://www.5shiguang.net/News/Details/7d0d022d-fef6-e511-9424-5ef3fcde9a37%27" tppabs="http://www.5shiguang.net/News/Details/7d0d022d-fef6-e511-9424-5ef3fcde9a37">Win10年度更新SDK预览版下载：UW…</a></div>
+				<div>在Build2016大会期间微软宣布了Win10年度更新中的一系列新特性，…</div>
+			</div>
+		</div>
+		<div class="media">
+			<div class="media-left">
+				<a href="javascript:if(confirm(%27http://www.5shiguang.net/News/Details/6a054651-69dc-e511-9423-5ef3fcde9a37  \n\nThis file was not retrieved by Teleport Pro, because it is linked too far away from its Starting Address. If you increase the in-domain depth setting for the Starting Address, this file will be queued for retrieval.  \n\nDo you want to open it from the server?%27))window.location=%27http://www.5shiguang.net/News/Details/6a054651-69dc-e511-9423-5ef3fcde9a37%27" tppabs="http://www.5shiguang.net/News/Details/6a054651-69dc-e511-9423-5ef3fcde9a37"><img class="media-object" src="../../UploadFiles/2016-02/ec383ec6-fddb-40d9-9521-d1136e6c00b0.jpg" tppabs="http://www.5shiguang.net/UploadFiles/2016-02/ec383ec6-fddb-40d9-9521-d1136e6c00b0.jpg" alt="Win10开发重要一步！微软收购Xamarin跨平台开发工具"></a>
+			</div>
+			<div class="media-body">
+				<div class="media-heading"><a href="javascript:if(confirm(%27http://www.5shiguang.net/News/Details/6a054651-69dc-e511-9423-5ef3fcde9a37  \n\nThis file was not retrieved by Teleport Pro, because it is linked too far away from its Starting Address. If you increase the in-domain depth setting for the Starting Address, this file will be queued for retrieval.  \n\nDo you want to open it from the server?%27))window.location=%27http://www.5shiguang.net/News/Details/6a054651-69dc-e511-9423-5ef3fcde9a37%27" tppabs="http://www.5shiguang.net/News/Details/6a054651-69dc-e511-9423-5ef3fcde9a37">Win10开发重要一步！微软收购Xam…</a></div>
+				<div>微软在软件和服务扩展到更多平台迈出了坚实的重要一步。今天，微…</div>
+			</div>
+		</div>
+		<div class="media">
+			<div class="media-left">
+				<a href="javascript:if(confirm(%27http://www.5shiguang.net/News/Details/a7683772-b8f1-e511-9424-5ef3fcde9a37  \n\nThis file was not retrieved by Teleport Pro, because it is linked too far away from its Starting Address. If you increase the in-domain depth setting for the Starting Address, this file will be queued for retrieval.  \n\nDo you want to open it from the server?%27))window.location=%27http://www.5shiguang.net/News/Details/a7683772-b8f1-e511-9424-5ef3fcde9a37%27" tppabs="http://www.5shiguang.net/News/Details/a7683772-b8f1-e511-9424-5ef3fcde9a37"><img class="media-object" src="../../UploadFiles/2016-03/d222f317-a531-4c69-b6e9-5aeb90685be4.jpg" tppabs="http://www.5shiguang.net/UploadFiles/2016-03/d222f317-a531-4c69-b6e9-5aeb90685be4.jpg" alt="雷军的程序人生"></a>
+			</div>
+			<div class="media-body">
+				<div class="media-heading"><a href="javascript:if(confirm(%27http://www.5shiguang.net/News/Details/a7683772-b8f1-e511-9424-5ef3fcde9a37  \n\nThis file was not retrieved by Teleport Pro, because it is linked too far away from its Starting Address. If you increase the in-domain depth setting for the Starting Address, this file will be queued for retrieval.  \n\nDo you want to open it from the server?%27))window.location=%27http://www.5shiguang.net/News/Details/a7683772-b8f1-e511-9424-5ef3fcde9a37%27" tppabs="http://www.5shiguang.net/News/Details/a7683772-b8f1-e511-9424-5ef3fcde9a37">雷军的程序人生</a></div>
+				<div>今天有朋友发给我一篇我在20年前在BBS上写的帖子。那还是1996年…</div>
+			</div>
+		</div>
+</div>
+
+
+<div class="news-sidebar">
+	<div class="sidebar-title"><span class="segmdl2 segmdl2-Comment"></span> 精彩评论</div>
+	<hr>
+	<ul class="sidebar-list">
+			<li>
+				<p>卖女孩的小火材</p>
+				<p>你们是漯河时光网络科技公司吗？？？我想制作一个比较不错的网站…</p>
+			</li>
+			<li>
+				<p>测试</p>
+				<p>测试</p>
+			</li>
+			<li>
+				<p>哈哈</p>
+				<p>很好</p>
+			</li>
+			<li>
+				<p>fff</p>
+				<p>cffff</p>
+			</li>
+			<li>
+				<p>马化腾</p>
+				<p>我们公司的职员和你比赛敲代码失败了 ，所以我决定来看看|！！！</p>
+			</li>
+	</ul>
+</div>
+
+<!--百度推荐-->
+<div id="hm_t_92228" class="mb15"></div></aside>
+		</div>
+	</div>
+</section>
+
+
+
+
+
+	<footer class="footer"><div class="container clearfix">
+	<p class="pull-right"><a class="scroll-top toscroll" href="#" title="回顶部" style="display:none;"><span class="segmdl2 segmdl2-Up"></span></a></p>
+	<p class="pull-left wow bounceInLeft" data-wow-offset="0">Copyright ©2007-2016 时光网络科技 All Rights Reserved.</p>
+	<p class="pull-right wow bounceInRight" data-wow-offset="0">豫ICP备14021451号-1</p>
+</div>
+</footer>
+	<!-- Modal -->
+	<div class="modal fade" id="defaultModal" tabindex="-1" role="dialog">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" id="myModalLabel">标题</h4>
+				</div>
+				<div class="modal-body">无内容</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+					<button type="button" class="btn btn-primary">确定</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="../../bundles/jquery-v=cJOGGbMZQHnS5cOfAl-q4gQc_xmDPie7j6nXNNKnrl01.js" tppabs="http://www.5shiguang.net/bundles/jquery?v=cJOGGbMZQHnS5cOfAl-q4gQc_xmDPie7j6nXNNKnrl01"></script>
+
+	<script src="../../bundles/jqueryval-v=dt3XaqpEn4rFA9MkDy2QmR-5tTdUVpSHTuOr3x-Sw981.js" tppabs="http://www.5shiguang.net/bundles/jqueryval?v=dt3XaqpEn4rFA9MkDy2QmR-5tTdUVpSHTuOr3x-Sw981"></script>
+
+	<script src="../../bundles/bootstrap-v=-ktyuuYVm8reiCqek-REkH9kFQQZ53F1Ay-TXz9RIew1.js" tppabs="http://www.5shiguang.net/bundles/bootstrap?v=-ktyuuYVm8reiCqek-REkH9kFQQZ53F1Ay-TXz9RIew1"></script>
+
+<script type="text/javascript" src="../../fi000001.axd-d=gfskerflcaigxeu7pnthexa9cungfwepi8hfyqlseg9ivimbn5eusemmjnicbyrozmgzqfkgces9sdj-w0rwod6nijpyvhpdyflsvue0jhsqv5upljuajd3pf0iu3ye8xyqhptkxrlpw4vsfjaaf9yyw_ylaub2alxc14goe_-e1&t=635936539940000000.js" tppabs="http://www.5shiguang.net/WebResource.axd?d=GFSkErfLcAIgxEU7PntHexA9cunGfwEPi8HFyQLsEg9IViMbN5euSEMMJnicByROZmgZqFKgcES9Sdj-W0RWod6nIjpyvHpdyfLsVUE0jhSqv5upLjUaJd3Pf0IU3YE8XYQhptKxrLPW4vsfjAAf9yYw_Ylaub2aLxc14gOE_-E1&t=635936539940000000"></script>
+	
+<script type="text/javascript" src="../../WebResource.axd-d=ttTOKv16_JsV2BzpCwfSuZAIGnsVB0OGSF69Gs-sZtqeASddrEJBVyfJTZZ4y-OyPPKBBVQiTMZ5KuJxr28NA_nrgKgCAxctnDmxnSVYl1gFPFH7CtRb17eHCyYggITUJ2_c2h5ZhGgyWSnAe0VQ7A2&t=635936539940000000.js" tppabs="http://www.5shiguang.net/WebResource.axd?d=ttTOKv16_JsV2BzpCwfSuZAIGnsVB0OGSF69Gs-sZtqeASddrEJBVyfJTZZ4y-OyPPKBBVQiTMZ5KuJxr28NA_nrgKgCAxctnDmxnSVYl1gFPFH7CtRb17eHCyYggITUJ2_c2h5ZhGgyWSnAe0VQ7A2&t=635936539940000000"></script>
+	<script src="../../Scripts/Kindeditor/kindeditor-all-min.js" tppabs="http://www.5shiguang.net/Scripts/Kindeditor/kindeditor-all-min.js"></script>
+	<script src="../../Scripts/Kindeditor/kindeditor.config.js" tppabs="http://www.5shiguang.net/Scripts/Kindeditor/kindeditor.config.js"></script>
+	<script src="../../Scripts/Kindeditor/plugins/code/prettify.js" tppabs="http://www.5shiguang.net/Scripts/Kindeditor/plugins/code/prettify.js"></script>
+	<script>
+		var onCommentBegin = function () {
+			$('#commentForm button[type="submit"]').attr('disabled', 'disabled');
+		}
+		var onCommentSuccess = function () {
+			$.get('/News/Details/66ee805a-3ffb-e511-9425-5ef3fcde9a37', null, function (html) {
+				$('form#commentForm').get(0).reset();
+				KindEditor.instances[0].html('');
+				$('#commentForm button[type="submit"]').removeAttr('disabled');
+				$('section#comments').html(html);
+			})
+		}
+		$(function () { prettyPrint() })
+	</script>
+
+	<script src="../../Scripts/wow.min.js" tppabs="http://www.5shiguang.net/Scripts/wow.min.js"></script>
+	<script>
+		//wow
+		new WOW({ animateClass: 'animated', offset: 0 }).init();
+		//toScroll
+		$('a.toscroll').bind('click', function (e) {
+			var $this = $(this), id = $this.attr('href');
+			var offset = $(id) && $(id).length ? $(id).offset().top : 0;
+			$('html,body').stop().animate({ scrollTop: offset }, 1200, 'easeInOutExpo');
+			e.preventDefault();
+		})
+		//scrollTop
+		$(window).scroll(function () {
+			($(this).scrollTop() >= 200) ? $('.scroll-top').fadeIn(300) : $('.scroll-top').fadeOut(300);
+		});
+		//百度推送
+		(function () {
+			var s = document.getElementsByTagName("script")[0];
+			var bp = document.createElement('script');
+			bp.src = '../../../push.zhanzhang.baidu.com/push.js'/*tpa=http://push.zhanzhang.baidu.com/push.js*/;
+			s.parentNode.insertBefore(bp, s);
+		})();
+	</script>
+	<!--百度统计-->
+	<script>
+		var _hmt = _hmt || [];
+		(function () {
+			var hm = document.createElement("script");
+			hm.src = "../../../hm.baidu.com/hm.js-08f070d846e7c32a036e47f9df0f362a.js"/*tpa=http://hm.baidu.com/hm.js?08f070d846e7c32a036e47f9df0f362a*/;
+			var s = document.getElementsByTagName("script")[0];
+			s.parentNode.insertBefore(hm, s);
+		})();
+	</script>
+</body>
+</html>
